@@ -1,5 +1,5 @@
 import React from 'react';
-import { throwStatement } from '@babel/types';
+// import { throwStatement } from '@babel/types';
 
 function NotesEditor(text, handleChange){
     return (
@@ -12,13 +12,29 @@ export default class NotesDetail extends React.Component{
         super(props);
         this.state = {
             isEditing: false,
-            draftText: props.note.text
+            draftText: props.note.text,
+            id: props.note.id
         };
+    }
+
+    static getDerivedStateFromProps(props, state){
+        // There is no 'This'
+        //so, we receive props and state as arguments
+
+        // Must return and object that describes any modifications to state
+        if(props.note.id !== state.id){
+            return {
+                id: props.note.id,
+                draftText: props.note.text
+            }
+        } else {
+            return null;
+        }
     }
 
     render() {
         // declares the note variables and assigns them to the properties from this.props where the name matches
-        const {note} = this.props;
+        // const {className, note} = this.props;
         const {isEditing, draftText} = this.state;
         return(
             <div>
@@ -26,7 +42,7 @@ export default class NotesDetail extends React.Component{
                     isEditing ? <NotesEditor handleChange={this._changeDraftText} text={draftText} /> : draftText
                 }
                 <br />
-                <button onClick={}>Toggle</button>
+                <button onClick={this._toggleIsEditing}>Toggle</button>
             </div>
         );
     }

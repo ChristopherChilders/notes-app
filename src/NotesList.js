@@ -11,9 +11,9 @@ function NotesListItem({id, text, handleClick}){
     )
 }
 
-export default function NotesList({notes}) {
-    const items = notes.map(note, i => 
-    <NotesListItem id={note.id} text={note.text} handleClick={handleSelection} key={id}/>);
+export default function NotesList({notes, handleSelection}) {
+    const items = notes.map(note => 
+    <NotesListItem id={note.id} text={note.text} handleClick={handleSelection}/>);
     return(
         <ul className={styles.list}>
             {items}
