@@ -34,7 +34,7 @@ export default class NotesApp extends React.Component{
                 <div className={styles.list}>
                 <NotesList notes={this.state.notes} handleSelection={this._selectNote}/>
                 </div>
-                <NotesDetail note={theNote}/>
+                <NotesDetail note={theNote} handleSave={this._updateNote} />
             </div>
         )
     }
